@@ -13,7 +13,7 @@ Allow users to fetch distinct values for a column that matches a given query
 
 It is an often requested and useful feature.
 
-Related issue: ParsePlatform/parse-server#2238
+[Related issue](https://github.com/ParsePlatform/parse-server/issues/2238)
 
 ## Proposed solution
 
