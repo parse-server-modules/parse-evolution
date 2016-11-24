@@ -28,6 +28,8 @@ Additionally, the presence of this parameter should modify the queries as follow
 - In MongoDB, execute the `.distinct()` method instead of the usual `find` query
 - In Postgres, use `DISTINCT(fieldname)` instead of the usual list of field names in the `find` query
 
+If the `distinct` parameter is present in addition to the `keys` and/or `include` parameters, I'd argue that these (`keys`/`include`) should be ignored as they wouldn't really make sense. Any documentation for `distinct` should probably include a mention of this decision.
+
 ## Alternatives considered
 
 Another alternative that could work would be to allow modifiers with field names in the `keys` parameter. Something like `distinct:field1,field2`.
