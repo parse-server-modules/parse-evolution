@@ -16,7 +16,7 @@ Introducing a `withinPolygon` constraint that takes an array of lat/lon coordina
 
 ## Detailed design
 
-Extending the SDK with a `withinPolygon` constraint.
+Extending the SDK with a `withinPolygon` query constraint.
 
 MongoDB 2.4 [added support](https://docs.mongodb.com/manual/applications/geospatial-indexes/#geojson-objects) for GeoJSON storage and queries. MongoDB 2.6 added support for additional GeoJSON types: MultiPoint, MultiLineString, MultiPolygon, GeometryCollection.
 
