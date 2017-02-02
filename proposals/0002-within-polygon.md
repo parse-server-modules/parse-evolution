@@ -14,25 +14,26 @@ Parse currently supports query constraints `withinGeoBox`, `withinKilometers`, `
 
 Introducing a `withinPolygon` constraint that takes an array of lat/lon coordinates, or even nested arrays of coordinates for MultiPolygon support.
 
-# Example
+## Detailed design
+
 This is how the Javascript SDK could look.
 
-Parse.Query `withinPolygon(key, polygon)`
+Parse.Query `withinPolygon(key, polygon)` 
+
 Adds a constraint to the query that requires a particular key's coordinates be contained within a given polygon bounding box.
 
 Parameters:
-* key <String>
+* `key` <String>
 The key to be constrained
 
-* polygon <Array>
-The polygon consists of an array of "linear ring" coordinate arrays. A "linear ring" array consists at least four `Parse.GeoPoint` coordinates, where the first and last coordinates specify the same position.<sup>[1](#footnote1)</sup>
+* `polygon` <Array>
+A polygon consists of an array of "linear ring" coordinate arrays. A "linear ring" array consists at least four `Parse.GeoPoint` coordinates, where the first and last coordinates specify the same position.<sup>[1](#footnote1)</sup>
 
 Notes:
 The linear ring cannot self-intersect.
-For polygons with multiple rings:
 
 
-# Polygon with a single ring (Javascript example)
+### Polygon with a single ring (Javascript example)
 ```
 var myCoordinates = [
   [
@@ -46,7 +47,7 @@ var query = new Parse.Query;
 query.withinPolygon('myKey', myCoordinates);
 ```
 
-# Polygon with multiple rings (Javascript example)
+### Polygon with multiple rings (Javascript example)
 ```
 var outerPoints = [
   new Parse.GeoPoint(55.225499,11.684647),
@@ -54,7 +55,7 @@ var outerPoints = [
   new Parse.GeoPoint(55.213356,11.839828),
   new Parse.GeoPoint(55.187493,11.743011)
 ];
-var innerPoints0 = [
+var innerPoints = [
   new Parse.GeoPoint(55.242726,11.748505),
   new Parse.GeoPoint(55.224324,11.725159),
   new Parse.GeoPoint(55.210222,11.751938),
@@ -64,8 +65,6 @@ var myCoordinates = [outerPoints,innerPoints];
 var query = new Parse.Query;
 query.withinPolygon('myKey', myCoordinates);
 ```
-
-## Detailed design
 
 Extending the SDK with a `withinPolygon` query constraint.
 
@@ -81,4 +80,4 @@ There's a useful application for playing with polygons [here](http://www.birdthe
 
 There are currently no alternative ways to do this with the current Parse SDK.
 
-<a name="footnote1">1</a>: Discussion: One could argue that three coordinates would be enough, and that the first coordinate would be re-added to the linear ring array before querying the database.
+<a name="footnote1"><sup>1</sup></a> Discussion: One could argue that three coordinates would be enough, and that the first coordinate would be re-added to the linear ring array before querying the database.
