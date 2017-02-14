@@ -12,11 +12,11 @@ Cyberthreats are a real problem. Any servers running Parse Server are susceptibl
 
 ## Proposed solution
 
-1. Introduce a paramater that allows the developer to specify the maximum number of incorrect attempts (configurable) on a specific username before 'freezing' the account for a given time frame  (configurable)
+* Introduce a paramater that allows the developer to specify the maximum number of incorrect attempts (configurable) on a specific username before 'freezing' the account for a given time frame  (configurable)
 
 OR
 
-2. Introduce an 'AfterLoginAttempt' hook in cloud code that would allow the user to write his own logic to implement an account freeze if a certain number of incorrect logins were attempted
+* Introduce an 'AfterLogin' hook in cloud code that resolves a promise if login was successful or rejects a promise if login was unsuccessful. This would allow the user to write his own logic to implement an account freeze if a certain number of incorrect logins were attempted
 
 ## Detailed design
 
