@@ -1,28 +1,28 @@
 # Feature name
 
-* Proposal: 0001-after-find
-* Authors: [Jonas DB](https://github.com/jonas-db)
+* Proposal: 0001-brute-force-attack-detection
+* Authors: [Simon Berry](https://github.com/simonaberry)
 * Review Manager: TBD
 * Status: **Awaiting review**
 
 ## Introduction
 ## Motivation
 
-Assume that we want to know the amount of views of a blog post, so everytime a blog post is fetched with a GET request, the amount of views should be updated.
+Cyberthreats are a real problem. Any servers running Parse Server are susceptible to hack attacks. The simplist would be a brute force attack - as there are no in built limits to login attempts. This is particulaly relevant as the default ACL on any new user added is Public Read - so it is fairly straight forward to get the usernames for all the users on a vanilla Parse Server (unless the developer has been good about changing teh User class ACLs). 
 
 ## Proposed solution
 
-Introducing an afterFind cloud code function. This is similar to the existing triggers and provides a uniform way to have triggers for GET/POST/DELETE requests.
+1. Introduce a paramater that allows the developer to specify the maximum number of incorrect attempts (configurable) on a specific username before 'freezing' the account for a given time frame  (configurable)
+
+OR
+
+2. Introduce an 'AfterLoginAttempt' hook in cloud code that would allow the user to write his own logic to implement an account freeze if a certain number of incorrect logins were attempted
 
 ## Detailed design
 
-Extending the cloud code with an afterFind function
+Don't know the Parse Server code well enough to suggest detailed implementation
 
 ## Alternatives considered
 
-If i'm correct, there are two ways to solve this problem:
+could also possibly monitor the log files using a library like this https://github.com/rfxn/brute-force-detection
 
-create a cloud function, which you call instead of querying a collection
-after the fetch request, save the object again with the counter increased
-
-While the first one is acceptable, the second is not. Although, I think that cloud code is meant for custom code, not for normal query requests. To remain consistent with the other cloud code, I propose the suggestion of afterFind. 
